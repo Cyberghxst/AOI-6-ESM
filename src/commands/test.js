@@ -1,4 +1,5 @@
 export const body = {
-  name: 'ping',
-  code: `$sendMessage[Mi ping es: \`$ping ms\`;no]`
+  name: 'nya',
+  type: 'default',
+  code: '$djsEval[$message;yes]'
 }

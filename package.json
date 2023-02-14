@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^18.0.6",
-    "aoi.js": "^6.0.3",
+    "aoi.js": "^6.1.0",
+    "aoi.parser": "^1.2.1",
     "chalk": "^5.2.0",
     "discord.js": "^14.7.1",
     "node-fetch": "^3.2.6"
