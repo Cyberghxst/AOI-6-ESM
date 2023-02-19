@@ -8,9 +8,9 @@ import Loader from './classes/loader.js';
 const client = new Aoi({
   token: 'Discord bot token',
   intents: [...intents],
-  prefix: 'Discord bot prefix'
+  prefix: 'Discord bot prefix',
+  events: [...events]
 });
-client.onMessage();
 // Custom ES6 command loader
 const loader = new Loader(client);
 loader.commands.load('./src/commands');
