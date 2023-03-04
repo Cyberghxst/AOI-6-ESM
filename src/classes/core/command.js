@@ -36,7 +36,7 @@ class CommandManager {
             if (!stat.isDirectory()) {
                 const command = (await (import(join(root, dir, file)))).command
                 if (!command) continue;
-                Array.isArray(command) ? command.forEach(cmd => array.push(cmd)) : array.push(cmd);
+                Array.isArray(command) ? command.forEach(cmd => array.push(cmd)) : array.push(command);
             }
             else { this.#cache(join(dir, file), array); continue; }
         }
