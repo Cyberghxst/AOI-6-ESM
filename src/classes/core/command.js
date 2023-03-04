@@ -1,10 +1,6 @@
 import { lstatSync, readdirSync } from 'fs';
-import { join, resolve } from 'path';
+import { join } from 'path';
 import * as color from 'chalk';
-import util from 'util';
-import path from 'node:path'; 
-import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
 
 /**
  * Starts the CommandManager class.
@@ -20,18 +16,23 @@ class CommandManager {
 
     /**
      * 
+     * @typedef Command
+     * @property {string} name The AOI.js command name.
+     * @property {string} type The AOI.js command type.
+     * @property {string} code The AOI.js command code.
+     * 
      * @param {string} dir The commands path.
-     * @param {Array<any>} array The array command collection.
-     * @returns Promise<any[]>
+     * @param {Array<Command>} array The array command collection.
+     * @returns Promise<Command[]>
      */
     async #cache (dir, array = []) {
         const root = process.cwd();
-        const files = readdirSync(resolve(root, dir));
+        const files = readdirSync(join(root, dir));
         for (const file of files) {
-            let stat = lstatSync(resolve(root, dir));
-            if (stat.isDirectory()) { this.#cache(resolve(dir, file), array); continue; }
+            let stat = lstatSync(join(root, dir));
+            if (stat.isDirectory()) { this.#cache(join(dir, file), array); continue; }
             else {
-                const command = (await (import(resolve(root, dir, file)))).command
+                const command = (await (import(join(root, dir, file)))).command
                 if (!command) continue;
                 Array.isArray(command) ? command.forEach(cmd => array.push(cmd)) : array.push(cmd);
             }
@@ -46,7 +47,7 @@ class CommandManager {
      */
     async load (dir) {
         const types = Object.getOwnPropertyNames(this.bot.cmd), commands = [], messages = [];
-        this.#cache(dir, commands, messages).then(() => {
+        this.#cache(dir, commands).then(() => {
             for (const command of commands) {
                 if (!('type' in command)) command.type = 'default';
                 const ok = types.some(type => command.type === type);
