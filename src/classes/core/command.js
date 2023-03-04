@@ -1,5 +1,5 @@
-import { lstatSync, readdirSync } from 'fs';
-import { join } from 'path';
+import { lstatSync, readdirSync } from 'node:fs';
+import { resolve } from 'node:path';
 import * as color from 'chalk';
 
 /**
@@ -27,12 +27,12 @@ class CommandManager {
      */
     async #cache (dir, array = []) {
         const root = process.cwd();
-        const files = readdirSync(join(root, dir));
+        const files = readdirSync(resolve(root, dir));
         for (const file of files) {
-            let stat = lstatSync(join(root, dir));
-            if (stat.isDirectory()) { this.#cache(join(dir, file), array); continue; }
+            let stat = lstatSync(resolve(root, dir));
+            if (stat.isDirectory()) { this.#cache(resolve(dir, file), array); continue; }
             else {
-                const command = (await (import(join(root, dir, file)))).command
+                const command = require(resolve(root, dir, file)).command
                 if (!command) continue;
                 Array.isArray(command) ? command.forEach(cmd => array.push(cmd)) : array.push(cmd);
             }

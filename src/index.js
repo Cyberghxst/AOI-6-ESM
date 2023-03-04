@@ -34,5 +34,6 @@ const client = new Bot({
     }
 
 });
+
 const loader = new Loader(client);
-loader.commands.load('./src/commands');
+loader.commands.load('src/commands');
