@@ -1,23 +1,8 @@
 {
-  "name": "aoi-6-esm",
-  "version": "1.0.0",
-  "description": "An AOI.js bot template using ESM.",
-  "main": "src/index.js",
+  "name": "AOI-6-ESM",
+  "packageManager": "yarn@3.4.1",
   "type": "module",
   "scripts": {
     "start": "node src/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Cyberghxst/AOI-6-ESM.git"
-  },
-  "author": "Cyberghxst",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Cyberghxst/AOI-6-ESM/issues"
-  },
-  "homepage": "https://github.com/Cyberghxst/AOI-6-ESM#readme",
-  "dependencies": {
-    "aoi.js": "^6.1.1"
   }
 }

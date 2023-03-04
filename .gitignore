@@ -3,3 +3,8 @@ config.js
 install.sh
 package-lock.json
 src/db
+.yarn
+.editorconfig
+.gitattributes
+yarn.lock
+.pnp.cjs

@@ -2,7 +2,8 @@ import { lstatSync, readdirSync } from 'fs';
 import { join } from 'path';
 import * as color from 'chalk';
 
-const line = '|--------------------------------------------------------------|';
+const head = '|  Command        |  Type          |  State        |';
+const line = '|--------------------------------------------------|';
 
 /**
  * Starts the CommandManager class.
@@ -50,16 +51,16 @@ class CommandManager {
     async load (dir) {
         const types = Object.getOwnPropertyNames(this.bot.cmd), commands = [], messages = [];
         this.#cache(dir, commands).then(() => {
-            console.log(line);
+            console.log(head);
             for (const command of commands) {
                 if (!('type' in command)) command.type = 'default';
                 const ok = types.some(type => command.type === type);
-                if (!ok) { messages.push(`${color.red('Invalid type')} | ${command.type} | ${color.greenBright(command.name)}`); continue; }
+                if (!ok) { messages.push(`|  ${command.name} | ${command.type} |   Failed to load`); continue; }
                 try {
                     this.bot.cmd.createCommand(command);
-                    messages.push(`${color.green('Loaded')} | ${command.type} | ${color.greenBright(command.name)}`);
+                    messages.push(`|  ${command.name} | ${command.type} |   Loaded`);
                 } catch(e) {
-                    messages.push(`${color.red('Failed to load')} | ${command.type} | ${color.greenBright(command.name)}`);
+                    messages.push(`|  ${command.name} | ${command.type} |   Failed to load`);
                 }
             }
             for (let msg of messages) { console.log(msg + '\n' + line) }

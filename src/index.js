@@ -4,13 +4,13 @@ import { token } from '../config.js';
 import * as aoidb from 'aoi.db';
 
 const client = new Bot({
-    token: token,
+    token: 'MTA3NDQwOTgxMTI1MDI0OTc1MA.GUTiov.TKzVyggJyKkwchbKqHx9gz3AkTd3ccmxFSJggI',
     prefix: '!',
     intents: ['MessageContent', 'GuildMessages', 'Guilds'],
     events: ['onMessage'],
     disableFunctions: [],
     respondToBots: false,
-    guildOnly: true,
+    guildOnly: false,
     autoUpdate: false,
     mobilePlatform: false,
     database: {
@@ -32,7 +32,6 @@ const client = new Bot({
         nonPrefixed: false,
         time: 10000
     }
-
 });
 
 const loader = new Loader(client);
