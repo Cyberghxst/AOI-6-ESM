@@ -1,6 +1,5 @@
 import { lstatSync, readdirSync } from 'fs';
 import { join } from 'path';
-import * as color from 'chalk';
 
 const head = '|  Command        |  Type          |  State        |';
 const line = '|--------------------------------------------------|';
