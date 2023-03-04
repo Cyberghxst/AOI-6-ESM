@@ -4,7 +4,7 @@ import { token } from '../config.js';
 import * as aoidb from 'aoi.db';
 
 const client = new Bot({
-    token: 'MTA3NDQwOTgxMTI1MDI0OTc1MA.GUTiov.TKzVyggJyKkwchbKqHx9gz3AkTd3ccmxFSJggI',
+    token: token,
     prefix: '!',
     intents: ['MessageContent', 'GuildMessages', 'Guilds'],
     events: ['onMessage'],
