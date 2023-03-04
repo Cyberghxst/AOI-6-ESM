@@ -1,7 +1,7 @@
 export const command = [{
     name: 'eval',
-    code: '$eval[$message]'
+    code: '$onlyIf[1==potatoes;whar]'
 },{
     name: 'turnoff',
-    code: '$killClient'
+    code: '$onlyIf[1==potatoes;why u wanna kill me¿]'
 }]

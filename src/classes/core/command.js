@@ -1,6 +1,8 @@
-import { lstatSync, readdirSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { lstatSync, readdirSync } from 'fs';
+import { join } from 'path';
 import * as color from 'chalk';
+
+const line = '|--------------------------------------------------------------|';
 
 /**
  * Starts the CommandManager class.
@@ -27,15 +29,15 @@ class CommandManager {
      */
     async #cache (dir, array = []) {
         const root = process.cwd();
-        const files = readdirSync(resolve(root, dir));
+        const files = readdirSync(join(root, dir));
         for (const file of files) {
-            let stat = lstatSync(resolve(root, dir));
-            if (stat.isDirectory()) { this.#cache(resolve(dir, file), array); continue; }
-            else {
-                const command = require(resolve(root, dir, file)).command
+            const stat = lstatSync(join(root, dir, file));
+            if (!stat.isDirectory()) {
+                const command = (await (import(join(root, dir, file)))).command
                 if (!command) continue;
                 Array.isArray(command) ? command.forEach(cmd => array.push(cmd)) : array.push(cmd);
             }
+            else { this.#cache(join(dir, file), array); continue; }
         }
         return array;
     }
@@ -48,6 +50,7 @@ class CommandManager {
     async load (dir) {
         const types = Object.getOwnPropertyNames(this.bot.cmd), commands = [], messages = [];
         this.#cache(dir, commands).then(() => {
+            console.log(line);
             for (const command of commands) {
                 if (!('type' in command)) command.type = 'default';
                 const ok = types.some(type => command.type === type);
@@ -59,7 +62,7 @@ class CommandManager {
                     messages.push(`${color.red('Failed to load')} | ${command.type} | ${color.greenBright(command.name)}`);
                 }
             }
-            for (let i of messages) { console.log(i) }
+            for (let msg of messages) { console.log(msg + '\n' + line) }
         });
         return;
     }

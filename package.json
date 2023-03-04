@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Cyberghxst/AOI-6-ESM/issues"
   },
-  "homepage": "https://github.com/Cyberghxst/AOI-6-ESM#readme"
+  "homepage": "https://github.com/Cyberghxst/AOI-6-ESM#readme",
+  "dependencies": {
+    "aoi.js": "^6.1.1"
+  }
 }

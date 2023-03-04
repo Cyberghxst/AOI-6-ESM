@@ -6,7 +6,7 @@ import * as aoidb from 'aoi.db';
 const client = new Bot({
     token: token,
     prefix: '!',
-    intents: ['MESSAGE_CONTENT', 'GUILDS', 'GUILD_MESSAGES'],
+    intents: ['MessageContent', 'GuildMessages', 'Guilds'],
     events: ['onMessage'],
     disableFunctions: [],
     respondToBots: false,
