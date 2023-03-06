@@ -51,5 +51,5 @@ const command = [{
 }]
 
 export { command }
-// Or export const command = {...}
+// Or export const command = [{...}]
 ```
