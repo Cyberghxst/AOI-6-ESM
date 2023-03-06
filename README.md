@@ -1,5 +1,5 @@
 # AOI v6: ESM
-This is a AOI.js v6 bot using ESM modules.
+This is a AOI.js v6 bot using EcmaScript Modules.
 
 ## Setup
 ```javascript
